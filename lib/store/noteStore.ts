@@ -1,6 +1,11 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { NewNote } from '../api';
+
+export interface NewNote {
+  title: string;
+  tag: string;
+  content: string;
+}
 
 type NoteDraftStore = {
   draft: NewNote;
