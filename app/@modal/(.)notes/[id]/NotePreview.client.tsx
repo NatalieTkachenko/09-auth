@@ -5,10 +5,17 @@ import css from './NotePreview.module.css';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import Modal from '@/components/Modal/Modal';
-import BackBtn from '@/components/BackBtn/BackBtn';
+
+import { useRouter } from 'next/navigation';
 
 export default function NotePreviewClient() {
   const { id } = useParams<{ id: string }>();
+  const router = useRouter();
+
+  const handleBack = () => {
+    router.back();
+  };
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ['note', id],
     queryFn: () => fetchNoteById(id),
@@ -28,7 +35,9 @@ export default function NotePreviewClient() {
             <p className={css.date}>{data?.createdAt}</p>
           </div>
         </div>
-        <BackBtn />
+        <button className={css.backBtn} onClick={handleBack}>
+          Back
+        </button>
       </Modal>
     </>
   );

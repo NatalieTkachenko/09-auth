@@ -4,8 +4,8 @@
 
 import { cookies } from 'next/headers';
 import api from './api';
-import User from '@/types/user';
-import Note from '@/types/note';
+import { User } from '@/types/user';
+import { Note } from '@/types/note';
 
 export interface FetchNotesResponse {
   notes: Note[] | [];

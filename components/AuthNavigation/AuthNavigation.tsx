@@ -32,7 +32,7 @@ export default function AuthNavigation() {
             </Link>
           </li>
           <li className={css.navigationItem}>
-            <p className={css.userEmail}>User email</p>
+            <p className={css.userEmail}>{user.username}</p>
             <button className={css.logoutButton} onClick={handleLogOut}>
               Logout
             </button>

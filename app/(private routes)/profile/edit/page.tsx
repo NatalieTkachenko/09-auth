@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useAuthStore } from '@/lib/store/authStore';
 import { updateMe, getMe } from '@/lib/api/clientApi';
 import css from './EditProfilePage.module.css';
@@ -30,7 +31,6 @@ export default function EditProfilePage() {
 
   const handleUpdateUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await updateMe({ username: userName });
 
     const res = await updateMe({ username: userName });
     if (res) {
@@ -44,8 +44,8 @@ export default function EditProfilePage() {
       <div className={css.profileCard}>
         <h1 className={css.formTitle}>Edit Profile</h1>
 
-        <img
-          src={user?.avatar}
+        <Image
+          src={user?.avatar ?? '/avatar-default.png'}
           alt="User Avatar"
           width={120}
           height={120}
@@ -64,7 +64,7 @@ export default function EditProfilePage() {
             />
           </div>
 
-          <p>Email: {user?.email}</p>
+          <p>Email: {userEmail}</p>
 
           <div className={css.actions}>
             <button type="submit" className={css.saveButton}>
