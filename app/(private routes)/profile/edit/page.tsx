@@ -22,7 +22,7 @@ export default function EditProfilePage() {
   }, []);
 
   const handleCancel = () => {
-    router.push('/profile');
+    router.back();
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,8 +33,10 @@ export default function EditProfilePage() {
     event.preventDefault();
 
     const res = await updateMe({ username: userName });
+    console.log(res);
     if (res) {
       setUser(res);
+      console.log('STATE:', useAuthStore.getState());
       router.push('/profile');
     }
   };

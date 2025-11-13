@@ -25,7 +25,7 @@ export default function NotePreviewClient() {
     <>
       {isLoading && <p>Loading, please wait...</p>}
       {isError && <p>Something went wrong.</p>}
-      <Modal>
+      <Modal onClose={handleBack}>
         <div className={css.container}>
           <div className={css.item}>
             <div className={css.header}>
@@ -35,9 +35,6 @@ export default function NotePreviewClient() {
             <p className={css.date}>{data?.createdAt}</p>
           </div>
         </div>
-        <button className={css.backBtn} onClick={handleBack}>
-          Back
-        </button>
       </Modal>
     </>
   );

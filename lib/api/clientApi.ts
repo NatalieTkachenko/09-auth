@@ -32,7 +32,7 @@ export async function fetchNotes(
 
   await delay(1000);
   try {
-    const response = await api.get<FetchNotesResponse>('notes', {
+    const response = await api.get<FetchNotesResponse>('/notes', {
       params: { search, page, tag },
     });
     console.log(response.data);
@@ -45,20 +45,20 @@ export async function fetchNotes(
 
 export async function createNote(newNote: NewNote): Promise<Note> {
   console.log('Я створюю нову нотатку', newNote);
-  const response = await api.post<Note>('notes', newNote);
+  const response = await api.post<Note>('/notes', newNote);
   console.log(response.data);
   return response.data;
 }
 
 export async function fetchNoteById(id: string): Promise<Note> {
   await delay(3000);
-  const response = await api.get<Note>(`notes/${id}`);
+  const response = await api.get<Note>(`/notes/${id}`);
   return response.data;
 }
 
 export async function deleteNote(id: string): Promise<Note> {
   console.log('Я видалю нотатку');
-  const response = await api.delete<Note>(`notes/${id}`);
+  const response = await api.delete<Note>(`/notes/${id}`);
   console.log(response.data);
   return response.data;
 }
@@ -80,7 +80,7 @@ export interface LogInRequest {
 }
 
 export async function login(data: LogInRequest): Promise<User> {
-  const response = await api.post('/auth/login', data);
+  const response = await api.post<User>('/auth/login', data);
   return response.data;
 }
 
@@ -107,6 +107,6 @@ interface UpdateUserRequest {
 }
 
 export const updateMe = async (payload: UpdateUserRequest): Promise<User> => {
-  const { data } = await api.patch<User>('users/me', payload);
+  const { data } = await api.patch<User>('/users/me', payload);
   return data;
 };
